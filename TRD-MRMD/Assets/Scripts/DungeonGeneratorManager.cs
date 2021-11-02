@@ -64,7 +64,7 @@ public class DungeonGeneratorManager : MonoBehaviour
 
             if (!positions.Contains(currentPos))
             {
-                var roomInfo = new RoomInfo();
+                var roomInfo = ScriptableObject.CreateInstance<RoomInfo>();
                 if (i == 0)
                 {
                     roomInfo.roomType = RoomInfo.RoomType.Spawn;
@@ -122,7 +122,14 @@ public class DungeonGeneratorManager : MonoBehaviour
     {
         foreach (var roomInfo in roomInfoList)
         {
-            var room = Instantiate(TRBL_Room, roomInfo.position, Quaternion.identity);
+            var room = Resources.Load("RoomPlaceholder") as GameObject;
+            /** //TODO change path and add RoomBehaviour script
+            var resource = Resources.Load<RoomBehaviour>("path");
+            var room = (resource as RoomBehaviour).gameObject;
+            //*/
+
+            Instantiate(room, roomInfo.position, Quaternion.identity);
+            //var room = Instantiate(TRBL_Room, roomInfo.position, Quaternion.identity);
         }
     }
 }
