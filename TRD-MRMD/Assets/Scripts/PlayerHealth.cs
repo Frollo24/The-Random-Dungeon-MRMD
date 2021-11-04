@@ -7,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
     public int MaxHealth = 100;
     public int currentHealth;
 
+    public HealthBarBehaviour healthBar;
+
     // Debug stuff
     [Header("Debugging options")]
     [SerializeField] private KeyCode debugKeyDamage = KeyCode.Space;
@@ -18,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = MaxHealth;
+        healthBar.SetMaxHealth(MaxHealth);
     }
 
     // Update is called once per frame
@@ -42,17 +45,20 @@ public class PlayerHealth : MonoBehaviour
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
 
     void RestoreHealth(int health)
     {
         currentHealth += health;
+        healthBar.SetHealth(currentHealth);
     }
 
     void TakeDeath()
     {
         //TODO make proper death
         Debug.Log("Death");
-        currentHealth = 100;
+        currentHealth = MaxHealth;
+        healthBar.SetMaxHealth(MaxHealth);
     }
 }
