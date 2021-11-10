@@ -6,6 +6,9 @@ public class PlayerHealth : MonoBehaviour
 {
     public int MaxHealth = 100;
     public int currentHealth;
+    public float invulnerabilityTime = 2.0f;
+    [SerializeField] private float invulnerabilityTimer;
+    [SerializeField] private bool invulnerability;
 
     public HealthBarBehaviour healthBar;
 
@@ -21,6 +24,8 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = MaxHealth;
         healthBar.SetMaxHealth(MaxHealth);
+        invulnerabilityTimer = 0;
+        invulnerability = false;
     }
 
     // Update is called once per frame
@@ -29,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(debugKeyDamage)) //TODO use a keycode which doesn't make conflict
         {
-            TakeDamage(debugDamageAmt);
+            DebugTakeDamage(debugDamageAmt);
         }
         if (Input.GetKeyDown(debugKeyHealth)) //TODO use a keycode which doesn't make conflict
         {
@@ -40,12 +45,35 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDeath();
         }
+
+        Invulnerability();
     }
 
-    void TakeDamage(int damage)
+    public void DebugTakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+    }
+
+    void Invulnerability()
+    {
+        if (invulnerability)
+        {
+            invulnerabilityTimer += Time.deltaTime;
+            if(invulnerabilityTimer >= invulnerabilityTime)
+            {
+                invulnerabilityTimer = 0;
+                invulnerability = false;
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (invulnerability) return;
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        invulnerability = true;
     }
 
     void RestoreHealth(int health)
