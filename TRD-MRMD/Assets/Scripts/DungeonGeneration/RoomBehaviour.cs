@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RoomBehaviour : MonoBehaviour
 {
+    public NavMeshSurface navMeshSurface;
+
     [Header("Room Information")]
     public RoomInfo roomInfo;
     public Transform[] wallSpawns;
@@ -16,7 +19,7 @@ public class RoomBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        BuildNavMesh();
     }
 
     // Update is called once per frame
@@ -44,6 +47,16 @@ public class RoomBehaviour : MonoBehaviour
         {
             Instantiate(wall, wallSpawns[3]);
         }
+    }
+
+    public void BuildNavMesh()
+    {
+        navMeshSurface.collectObjects = CollectObjects.All;
+        navMeshSurface.defaultArea = 1;
+        // navMeshSurface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
+        navMeshSurface.ignoreNavMeshAgent = false;
+        navMeshSurface.BuildNavMesh();
+
     }
 
     public void EnterRoom()

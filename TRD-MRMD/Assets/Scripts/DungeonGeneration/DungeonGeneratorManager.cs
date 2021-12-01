@@ -131,6 +131,7 @@ public class DungeonGeneratorManager : MonoBehaviour
             var room = Instantiate(resource, roomInfo.position, Quaternion.identity);
             room.roomInfo = roomInfo;
             room.SpawnWalls();
+            //room.BuildNavMesh();
             Debug.Log("Instantiated room");
         }
     }
