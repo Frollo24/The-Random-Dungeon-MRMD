@@ -7,6 +7,8 @@ public class PlayerMagic : MonoBehaviour
     public int maxMagic = 100;
     public int currentMagic;
 
+    public Spell fireSpell;
+
     public MagicBarBehaviour magicBar;
 
     //Debug stuff
@@ -34,6 +36,7 @@ public class PlayerMagic : MonoBehaviour
             RestoreMagic(10);
         }
 #endif
+
     }
 
     public
@@ -43,6 +46,9 @@ public class PlayerMagic : MonoBehaviour
         {
             currentMagic -= spellCost;
             magicBar.setMagic(currentMagic);
+
+            Spell spell = Instantiate(fireSpell, transform.position + transform.forward * 2, transform.rotation);
+            spell.direction = transform.forward;
         }
     }
 
