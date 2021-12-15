@@ -11,6 +11,8 @@ public class EnemyBehaviour : MonoBehaviour
     public ThirdPersonMovement player;
 
     public float threshold = 6.0f;
+    [SerializeField] private Vector3 destination;
+    [SerializeField] private bool isDestinationSet;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +39,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (player != null)
             MoveEnemy();
         else
-            FindObjectOfType<ThirdPersonMovement>();
+            player = FindObjectOfType<ThirdPersonMovement>();
     }
 
 
@@ -52,7 +54,33 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void MoveEnemy()
     {
-        if(Vector3.Distance(transform.position, player.transform.position) < threshold)
-            agent.SetDestination(player.transform.position);
+        if (Vector3.Distance(transform.position, player.transform.position) < threshold)
+        {
+            destination = player.transform.position;
+            destination.y = transform.position.y;
+            agent.SetDestination(destination);
+            isDestinationSet = false;
+        }
+        else
+        {
+            if (!isDestinationSet)
+            {
+                destination += Random.insideUnitSphere * threshold;
+                destination.y = transform.position.y;
+
+                NavMesh.SamplePosition(destination, out NavMeshHit hit, threshold, 1);
+                destination = hit.position;
+
+                agent.SetDestination(hit.position);
+                isDestinationSet = true;
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, destination) < 1.5f)
+                {
+                    isDestinationSet = false;
+                }
+            }
+        }
     }
 }
