@@ -17,7 +17,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         //agent = gameObject.AddComponent<NavMeshAgent>();
-        Debug.Log(agent.isOnNavMesh);
+        //Debug.Log(agent.isOnNavMesh);
 
         player = FindObjectOfType<ThirdPersonMovement>();
     }

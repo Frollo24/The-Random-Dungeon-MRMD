@@ -25,10 +25,10 @@ public class Spell : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
+        if (other.tag == "Enemy")
+            other.GetComponent<EnemyHealth>().TakeDamage(damage);
 
-        if (other.tag != "Player")
-            Destroy(gameObject);
+        Destroy(gameObject);
     }
 
 }

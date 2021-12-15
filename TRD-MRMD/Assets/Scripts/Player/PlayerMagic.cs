@@ -47,7 +47,8 @@ public class PlayerMagic : MonoBehaviour
             currentMagic -= spellCost;
             magicBar.setMagic(currentMagic);
 
-            Spell spell = Instantiate(fireSpell, transform.position + transform.forward * 2, transform.rotation);
+            //Generates the spell ball.
+            Spell spell = Instantiate(fireSpell, transform.position + transform.forward, transform.rotation);
             spell.direction = transform.forward;
         }
     }
