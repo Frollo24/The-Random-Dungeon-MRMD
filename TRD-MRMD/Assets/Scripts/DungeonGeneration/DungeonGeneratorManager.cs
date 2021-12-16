@@ -19,8 +19,13 @@ public class DungeonGeneratorManager : MonoBehaviour
 
     public Vector3 MoveAmount = new Vector3(10, 0, 10); //Distance between rooms
 
-    public GameObject TRBL_Room;
+    [Header("Spawning Room Config")]
+    [SerializeField] private uint fountainRoomsSpawned;
+    [SerializeField] private uint maxFountainRooms = 2;
+    [SerializeField] private uint lootRoomsSpawned;
+    [SerializeField] private uint maxLootRooms = 2;
 
+    [Header("Private serialized stuff")]
     [SerializeField] private Vector3 currentPos = Vector3.zero;
 
     [SerializeField] private List<RoomInfo> roomInfoList; //TODO save useful room info for rearrangement
@@ -29,6 +34,9 @@ public class DungeonGeneratorManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        fountainRoomsSpawned = 0;
+        lootRoomsSpawned = 0;
+
         positions = new List<Vector3>();
         roomInfoList = new List<RoomInfo>();
         GenerateLevel();
@@ -103,18 +111,25 @@ public class DungeonGeneratorManager : MonoBehaviour
 
     void SetRandomRoom(RoomInfo roomInfo)
     {
-        int rand = UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(RoomInfo.RoomType)).Length - 2);
-        switch (rand)
+        float rnd = UnityEngine.Random.Range(0.0f, 1.0f);
+
+        if (rnd < 0.1f && fountainRoomsSpawned < maxFountainRooms)
         {
-            case 0:
-                roomInfo.roomType = RoomInfo.RoomType.Enemies;
-                break;
-            case 1:
-                roomInfo.roomType = RoomInfo.RoomType.Cafe;
-                break;
-            case 2:
-                roomInfo.roomType = RoomInfo.RoomType.Loot;
-                break;
+            roomInfo.roomType = RoomInfo.RoomType.Fountain;
+            fountainRoomsSpawned++;
+        }
+        else if (rnd < 0.4f && lootRoomsSpawned < maxLootRooms)
+        {
+            roomInfo.roomType = RoomInfo.RoomType.Loot;
+            lootRoomsSpawned++;
+        }
+        else if (rnd < 0.6f)
+        {
+            roomInfo.roomType = RoomInfo.RoomType.Enemies;
+        }
+        else
+        {
+            roomInfo.roomType = RoomInfo.RoomType.Empty;
         }
     }
 
@@ -132,7 +147,7 @@ public class DungeonGeneratorManager : MonoBehaviour
             room.roomInfo = roomInfo;
             room.SpawnWalls();
             //room.BuildNavMesh();
-            Debug.Log("Instantiated room");
+            Debug.Log("Instantiated room: " + roomInfo.roomType);
         }
     }
 }

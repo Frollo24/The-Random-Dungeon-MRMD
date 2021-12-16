@@ -48,7 +48,7 @@ public class PlayerMagic : MonoBehaviour
             magicBar.setMagic(currentMagic);
 
             //Generates the spell ball.
-            Spell spell = Instantiate(fireSpell, transform.position + transform.forward, transform.rotation);
+            Spell spell = Instantiate(fireSpell, transform.position + transform.forward * 1.2f, transform.rotation);
             spell.direction = transform.forward;
         }
     }

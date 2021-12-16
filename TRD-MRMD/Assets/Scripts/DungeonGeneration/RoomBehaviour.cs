@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class RoomBehaviour : MonoBehaviour
 {
     public NavMeshSurface navMeshSurface;
+    private EnemyGenerator enemyGenerator;
 
     [Header("Room Information")]
     public RoomInfo roomInfo;
@@ -15,10 +16,22 @@ public class RoomBehaviour : MonoBehaviour
     public bool hasBeenVisited;
     public bool hasSpawned;
 
+    [Header("Room Config")]
+    public bool colourRoom;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        enemyGenerator = FindObjectOfType<EnemyGenerator>();
+
+#if UNITY_EDITOR
+        if (colourRoom)
+        {
+            ColourRoom();
+        }
+#endif
+
         BuildNavMesh();
     }
 
@@ -26,6 +39,31 @@ public class RoomBehaviour : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void ColourRoom()
+    {
+        foreach (var elem in GetComponentsInChildren<MeshRenderer>())
+        {
+            switch (roomInfo.roomType)
+            {
+                case RoomInfo.RoomType.Spawn:
+                    elem.material.color = Color.cyan;
+                    break;
+                case RoomInfo.RoomType.Enemies:
+                    elem.material.color = Color.magenta;
+                    break;
+                case RoomInfo.RoomType.Fountain:
+                    elem.material.color = Color.green;
+                    break;
+                case RoomInfo.RoomType.Loot:
+                    elem.material.color = Color.yellow;
+                    break;
+                case RoomInfo.RoomType.Boss:
+                    elem.material.color = Color.red;
+                    break;
+            }
+        }
     }
 
     public void SpawnWalls()
@@ -56,13 +94,30 @@ public class RoomBehaviour : MonoBehaviour
         // navMeshSurface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
         navMeshSurface.ignoreNavMeshAgent = false;
         navMeshSurface.BuildNavMesh();
-
     }
 
     public void EnterRoom()
     {
-        if (!hasBeenVisited) return;
+        if (hasBeenVisited) return;
 
         hasBeenVisited = true;
+
+        switch (roomInfo.roomType)
+        {
+            case RoomInfo.RoomType.Enemies:
+                EnterEnemyRoom();
+                break;
+        }
+    }
+
+    void EnterEnemyRoom()
+    {
+        if (!hasSpawned)
+        {
+            //TODO improve enemy spawning
+            enemyGenerator.SpawnEnemies(enemySpawns);
+        }
+
+        hasSpawned = true;
     }
 }
