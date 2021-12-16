@@ -28,7 +28,8 @@ public class Spell : MonoBehaviour
         if (other.tag == "Enemy")
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
 
-        Destroy(gameObject);
+        if (!other.CompareTag("Player") && !other.isTrigger)
+            Destroy(gameObject);
     }
 
 }
