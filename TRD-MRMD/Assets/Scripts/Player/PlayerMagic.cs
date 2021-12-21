@@ -20,7 +20,7 @@ public class PlayerMagic : MonoBehaviour
     void Start()
     {
         currentMagic = maxMagic;
-        magicBar.setMaxMagic(maxMagic);
+        magicBar.SetMaxMagic(maxMagic);
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class PlayerMagic : MonoBehaviour
         if(currentMagic >= spellCost)
         {
             currentMagic -= spellCost;
-            magicBar.setMagic(currentMagic);
+            magicBar.SetMagic(currentMagic);
 
             //Generates the spell ball.
             Spell spell = Instantiate(fireSpell, transform.position + transform.forward * 1.2f, transform.rotation);
@@ -60,6 +60,6 @@ public class PlayerMagic : MonoBehaviour
         {
             currentMagic = maxMagic;
         }
-        magicBar.setMagic(currentMagic);
+        magicBar.SetMagic(currentMagic);
     }
 }

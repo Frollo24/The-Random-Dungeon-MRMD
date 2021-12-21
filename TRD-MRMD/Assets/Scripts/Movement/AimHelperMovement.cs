@@ -47,12 +47,12 @@ public class AimHelperMovement : MonoBehaviour
         }
         else
         {
-            if (transform.localPosition.x > 0.4f)
+            if (transform.localPosition.x > 0.04f)
             {
                 transform.localPosition += Vector3.left * smoothness * Time.deltaTime;
             }
 
-            if (transform.localPosition.x < -0.4f)
+            if (transform.localPosition.x < -0.04f)
             {
                 transform.localPosition += Vector3.right * smoothness * Time.deltaTime;
             }
@@ -73,9 +73,13 @@ public class AimHelperMovement : MonoBehaviour
         }
         else
         {
-            if (transform.localPosition.z > 0.1f)
+            if (transform.localPosition.z > 0.05f)
             {
                 transform.localPosition += Vector3.back * smoothness * Time.deltaTime;
+            }
+            if (transform.localPosition.z < -0.05f)
+            {
+                transform.localPosition += Vector3.forward * smoothness * Time.deltaTime;
             }
         }
     }
