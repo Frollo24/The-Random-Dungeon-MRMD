@@ -16,8 +16,6 @@ public class Spell : MonoBehaviour
     {
         particleSystem = GetComponentInChildren<ParticleSystem>();
         particles = particleSystem.transform;
-
-        GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
     private void Update()

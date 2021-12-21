@@ -575,7 +575,7 @@ MonoBehaviour:
   - {fileID: 57753899421394922}
   hasBeenVisited: 0
   hasSpawned: 0
-  colourRoom: 1
+  colourRoom: 0
 --- !u!1 &3384231169447361770
 GameObject:
   m_ObjectHideFlags: 0

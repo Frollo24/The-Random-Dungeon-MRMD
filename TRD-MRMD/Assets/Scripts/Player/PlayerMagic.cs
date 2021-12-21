@@ -39,8 +39,7 @@ public class PlayerMagic : MonoBehaviour
 
     }
 
-    public
-        void CastSpell(int spellCost)
+    public void CastSpell(int spellCost)
     {
         if(currentMagic >= spellCost)
         {
