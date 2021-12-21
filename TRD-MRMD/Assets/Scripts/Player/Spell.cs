@@ -8,9 +8,14 @@ public class Spell : MonoBehaviour
     public Vector3 direction { get; set; }
     public float speed;
 
+    [SerializeField] private Transform particles;
+    [SerializeField] private new ParticleSystem particleSystem;
+    public GameObject explosion;
+
     private void Start()
     {
-        GetComponent<MeshRenderer>().material.color = Color.red;
+        particleSystem = GetComponentInChildren<ParticleSystem>();
+        particles = particleSystem.transform;
     }
 
     private void Update()
@@ -23,13 +28,28 @@ public class Spell : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
     }
 
+    private void Explode()
+    {
+        // Instantiate an explosion
+        var exploding = Instantiate(explosion, transform.position, transform.rotation);
+
+        // Move the particle system
+        particles.parent = exploding.transform;
+        var emission = particleSystem.emission;
+        emission.rateOverTime = 0;
+
+        // Destroy the objects
+        Destroy(gameObject);
+        Destroy(exploding, 2.5f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
 
         if (!other.CompareTag("Player") && !other.isTrigger)
-            Destroy(gameObject);
+            Explode();
     }
 
 }

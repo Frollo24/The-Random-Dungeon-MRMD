@@ -10,7 +10,9 @@ public class EnemyBehaviour : MonoBehaviour
     public NavMeshAgent agent;
     public ThirdPersonMovement player;
 
-    public float threshold = 6.0f;
+    public int enemyDamage = 10;
+
+    public float detectionThreshold = 6.0f;
     [SerializeField] private Vector3 destination;
     [SerializeField] private bool isDestinationSet;
 
@@ -48,14 +50,14 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(10);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyDamage);
             transform.position -= new Vector3(1.5f, 0f, 0f);
         }
     }
 
     private void MoveEnemy()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < threshold)
+        if (Vector3.Distance(transform.position, player.transform.position) < detectionThreshold)
         {
             destination = player.transform.position;
             destination.y = transform.position.y;
@@ -66,10 +68,10 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if (!isDestinationSet)
             {
-                destination += Random.insideUnitSphere * threshold;
+                destination += Random.insideUnitSphere * detectionThreshold;
                 destination.y = transform.position.y;
 
-                NavMesh.SamplePosition(destination, out NavMeshHit hit, threshold, 1);
+                NavMesh.SamplePosition(destination, out NavMeshHit hit, detectionThreshold, 1);
                 destination = hit.position;
 
                 agent.SetDestination(hit.position);

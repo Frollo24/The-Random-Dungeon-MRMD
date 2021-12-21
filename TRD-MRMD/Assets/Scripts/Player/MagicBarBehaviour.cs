@@ -8,17 +8,13 @@ public class MagicBarBehaviour : MonoBehaviour
     public Slider slider;
     public Image fill;
 
-    int maxMagic, magic;
-
-    public void setMaxMagic(int maxMagic)
+    public void SetMaxMagic(int maxMagic)
     {
         slider.maxValue = maxMagic;
         slider.value = maxMagic;
-
-        fill.color = Color.magenta;
     }
 
-    public void setMagic(int magic)
+    public void SetMagic(int magic)
     {
         slider.value = magic;
 
