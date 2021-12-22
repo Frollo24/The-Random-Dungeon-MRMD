@@ -13,6 +13,8 @@ public class EnemyBehaviour : MonoBehaviour
     public int enemyDamage = 10;
     public float forceAmount = 6.0f;
 
+    public int coinsAmount = 1;
+
     public float detectionThreshold = 6.0f;
     [SerializeField] private Vector3 destination;
     [SerializeField] private bool isDestinationSet;

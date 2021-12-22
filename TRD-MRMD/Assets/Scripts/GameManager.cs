@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("Player stats")]
     public int playerHealth;
     public int playerMagic;
+    public int playerScore;
 
     private void Awake()
     {
