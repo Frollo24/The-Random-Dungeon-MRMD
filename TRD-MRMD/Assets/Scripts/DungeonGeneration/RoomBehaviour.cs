@@ -140,7 +140,7 @@ public class RoomBehaviour : MonoBehaviour
         navMeshSurface.collectObjects = CollectObjects.All;
         navMeshSurface.defaultArea = 1;
         // navMeshSurface.useGeometry = NavMeshCollectGeometry.PhysicsColliders;
-        navMeshSurface.ignoreNavMeshAgent = false;
+        navMeshSurface.ignoreNavMeshAgent = true;
         navMeshSurface.BuildNavMesh();
     }
 

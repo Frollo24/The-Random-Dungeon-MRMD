@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class DragonBehaviour : EnemyBehaviour
 {
+    public bool IsDying = true;
+
+    private void OnApplicationQuit()
+    {
+        IsDying = false;
+    }
+
     private void OnDisable()
     {
-        FindObjectOfType<LevelManager>().SpawnEndGameTrigger(transform);
+        if(IsDying)
+            FindObjectOfType<LevelManager>().SpawnEndGameTrigger(transform);
     }
 }
