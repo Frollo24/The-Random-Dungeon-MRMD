@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class DragonBehaviour : EnemyBehaviour
 {
-    private void OnDestroy()
+    private void OnDisable()
     {
-        var room = FindObjectOfType<RoomBehaviour>();
-        FindObjectOfType<LevelManager>().SpawnNextLevelTrigger(room);
+        FindObjectOfType<LevelManager>().SpawnEndGameTrigger(transform);
     }
 }

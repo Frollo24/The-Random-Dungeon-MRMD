@@ -13,11 +13,12 @@ public class RoomBehaviour : MonoBehaviour
     public Transform[] wallSpawns;
     public GameObject wall;
     public Transform[] enemySpawns;
+    public Transform bossSpawn;
     public bool hasBeenVisited;
     public bool hasSpawned;
 
     [Header("Room Config")]
-    public bool colourRoom;
+    public bool colourRoomInEditor;
 
 
     private void Awake()
@@ -30,10 +31,16 @@ public class RoomBehaviour : MonoBehaviour
     {
 
 #if UNITY_EDITOR
-        if (colourRoom)
+        if (colourRoomInEditor)
         {
-            ColourRoom();
+            ColourRoomInEditor();
         }
+        else
+        {
+            ColourRoomInGame();
+        }
+#else
+        ColourRoomInGame();
 #endif
 
         BuildNavMesh();
@@ -45,7 +52,7 @@ public class RoomBehaviour : MonoBehaviour
         
     }
 
-    void ColourRoom()
+    void ColourRoomInEditor()
     {
         foreach (var elem in GetComponentsInChildren<MeshRenderer>())
         {
@@ -69,6 +76,40 @@ public class RoomBehaviour : MonoBehaviour
                 case RoomInfo.RoomType.NextLevel:
                     elem.material.color = Color.blue;
                     break;
+            }
+        }
+    }
+
+    void ColourRoomInGame()
+    {
+        foreach (var elem in GetComponentsInChildren<MeshRenderer>())
+        {
+            if (elem.name == "Floor")
+            {
+                var gameManager = GameManager.gameManager;
+
+                switch (gameManager.level)
+                {
+                    case 1:
+                        elem.material.color = Color.green;
+                        break;
+                    case 2:
+                        elem.material.color = Color.blue;
+                        break;
+                    case 3:
+                        elem.material.color = Color.magenta;
+                        break;
+                    case 4:
+                        elem.material.color = Color.red;
+                        break;
+                    case 5:
+                        elem.material.color = Color.black;
+                        break;
+                }
+            }
+            else
+            {
+                elem.material.color = Color.black;
             }
         }
     }
@@ -159,7 +200,7 @@ public class RoomBehaviour : MonoBehaviour
         if (!hasSpawned)
         {
             //TODO spawn boss
-            enemyGenerator.SpawnBoss(transform);
+            enemyGenerator.SpawnBoss(bossSpawn);
         }
 
         hasSpawned = true;

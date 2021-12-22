@@ -10,4 +10,9 @@ public class LevelManager : MonoBehaviour
     {
         Instantiate(nextLevelTrigger, room.transform.position + Vector3.up, room.transform.rotation);
     }
+
+    public void SpawnEndGameTrigger(Transform boss)
+    {
+        Instantiate(nextLevelTrigger, boss.position + Vector3.down, boss.rotation);
+    }
 }
