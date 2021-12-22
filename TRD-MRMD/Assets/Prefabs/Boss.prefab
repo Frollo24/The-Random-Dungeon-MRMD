@@ -17,9 +17,11 @@ MonoBehaviour:
   player: {fileID: 0}
   enemyDamage: 20
   forceAmount: 6
+  coinsAmount: 20
   detectionThreshold: 40
   destination: {x: 0, y: 0, z: 0}
   isDestinationSet: 0
+  IsDying: 1
 --- !u!1001 &2629298504138712601
 PrefabInstance:
   m_ObjectHideFlags: 0

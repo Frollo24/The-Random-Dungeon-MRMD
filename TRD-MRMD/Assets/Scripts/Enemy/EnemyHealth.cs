@@ -17,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= dmg;
         if (currentHealth <= 0)
         {
+            GameManager.gameManager.playerScore += GetComponent<EnemyBehaviour>().coinsAmount;
             Destroy(gameObject);
         }
     }
