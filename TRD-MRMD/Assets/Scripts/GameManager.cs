@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gameManager;
 
+    public Light sunlight;
+
     [Header("Player stats")]
     public int playerHealth;
     public int playerMagic;
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
         if (scene.name == "SampleScene" && FindObjectOfType<ThirdPersonMovement>() != null)
         {
             SetPlayerStats();
+            SetupSunlightIntensity();
         }
     }
 
@@ -54,6 +57,12 @@ public class GameManager : MonoBehaviour
         var player = FindObjectOfType<ThirdPersonMovement>();
         player.GetComponent<PlayerHealth>().SetHealth(playerHealth);
         player.GetComponent<PlayerMagic>().SetMagic(playerMagic);
+    }
+
+    void SetupSunlightIntensity()
+    {
+        sunlight = FindObjectOfType<Light>();
+        sunlight.intensity = 1 - (level - 1) * 0.2f;
     }
 
     // Start is called before the first frame update
@@ -67,4 +76,6 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    
 }
