@@ -79,7 +79,7 @@ public class DungeonGeneratorManager : MonoBehaviour
                 }
                 else if (i == num - 1)
                 {
-                    roomInfo.roomType = RoomInfo.RoomType.Boss;
+                    roomInfo.roomType = RoomInfo.RoomType.NextLevel;
                 }
                 else
                     SetRandomRoom(roomInfo);
@@ -146,7 +146,7 @@ public class DungeonGeneratorManager : MonoBehaviour
             var room = Instantiate(resource, roomInfo.position, Quaternion.identity);
             room.roomInfo = roomInfo;
             room.SpawnWalls();
-            //room.BuildNavMesh();
+            room.SetupRoom();
             Debug.Log("Instantiated room: " + roomInfo.roomType);
         }
     }

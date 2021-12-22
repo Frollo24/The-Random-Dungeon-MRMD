@@ -60,6 +60,7 @@ public class RoomBehaviour : MonoBehaviour
                     elem.material.color = Color.yellow;
                     break;
                 case RoomInfo.RoomType.Boss:
+                case RoomInfo.RoomType.NextLevel:
                     elem.material.color = Color.red;
                     break;
             }
@@ -96,6 +97,21 @@ public class RoomBehaviour : MonoBehaviour
         navMeshSurface.BuildNavMesh();
     }
 
+    public void SetupRoom()
+    {
+        switch (roomInfo.roomType)
+        {
+            case RoomInfo.RoomType.NextLevel:
+                SetupNextLevel();
+                break;
+        }
+    }
+
+    void SetupNextLevel()
+    {
+        FindObjectOfType<LevelManager>().SpawnNextLevelTrigger(this);
+    }
+
     public void EnterRoom()
     {
         if (hasBeenVisited) return;
@@ -107,6 +123,9 @@ public class RoomBehaviour : MonoBehaviour
             case RoomInfo.RoomType.Enemies:
                 EnterEnemyRoom();
                 break;
+            case RoomInfo.RoomType.Boss:
+                EnterBossRoom();
+                break;
         }
     }
 
@@ -116,6 +135,17 @@ public class RoomBehaviour : MonoBehaviour
         {
             //TODO improve enemy spawning
             enemyGenerator.SpawnEnemies(enemySpawns);
+        }
+
+        hasSpawned = true;
+    }
+
+    void EnterBossRoom()
+    {
+        if (!hasSpawned)
+        {
+            //Spawn scene reloader
+
         }
 
         hasSpawned = true;
