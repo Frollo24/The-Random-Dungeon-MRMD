@@ -11,6 +11,7 @@ public class EnemyBehaviour : MonoBehaviour
     public ThirdPersonMovement player;
 
     public int enemyDamage = 10;
+    public float forceAmount = 6.0f;
 
     public float detectionThreshold = 6.0f;
     [SerializeField] private Vector3 destination;
@@ -51,7 +52,6 @@ public class EnemyBehaviour : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyDamage);
-            transform.position -= new Vector3(1.5f, 0f, 0f);
         }
     }
 
