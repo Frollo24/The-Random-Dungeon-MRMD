@@ -17,7 +17,5 @@ public class MagicBarBehaviour : MonoBehaviour
     public void SetMagic(int magic)
     {
         slider.value = magic;
-
-        fill.color = Color.magenta;
     }
 }

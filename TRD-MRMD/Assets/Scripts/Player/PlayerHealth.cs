@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
         Invulnerability();
     }
 
-    public void DebugTakeDamage(int damage)
+    void DebugTakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
@@ -81,15 +81,27 @@ public class PlayerHealth : MonoBehaviour
         invulnerability = true;
     }
 
-    void RestoreHealth(int health)
+    public void RestoreHealth(int health)
     {
         currentHealth += health;
+        if (currentHealth > MaxHealth)
+        {
+            currentHealth = MaxHealth;
+        }
         healthBar.SetHealth(currentHealth);
     }
 
     public void SetHealth(int health)
     {
         currentHealth = health;
+        if (currentHealth > MaxHealth)
+        {
+            currentHealth = MaxHealth;
+        }
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
         healthBar.SetHealth(currentHealth);
     }
 

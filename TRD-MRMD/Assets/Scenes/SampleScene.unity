@@ -198,6 +198,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140696770}
   m_CullTransparentMesh: 1
+--- !u!1 &377651717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 377651719}
+  - component: {fileID: 377651718}
+  m_Layer: 0
+  m_Name: '@ObjectSpawner'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &377651718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377651717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd420b6ef03595040ae2aea542b02e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loot: {fileID: 1452314374248264503, guid: c6026c313013f98489c91d83e5321c0a, type: 3}
+  fountain: {fileID: 6516447499659934328, guid: 1f1c9aad327cf4649ba2a2776f0c34ca, type: 3}
+--- !u!4 &377651719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377651717}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.46114, y: -12.791, z: 10.388}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &481374645
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +700,7 @@ CharacterController:
   m_Height: 1.6
   m_Radius: 0.5
   m_SlopeLimit: 30
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -711,6 +756,8 @@ MonoBehaviour:
   currentMagic: 0
   fireSpell: {fileID: 5162743714366460569, guid: a00361183a0f41a4c929f91d525e10ce, type: 3}
   magicBar: {fileID: 899627546}
+  timeWithoutCast: 0
+  maxTimeWithoutCast: 2
   debugKeySpellCost: 109
   debugSpellCostAmt: 10
 --- !u!54 &731150292
@@ -2927,7 +2974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bcef61440e8b74d9010455b274188c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 5
+  level: 1
   maxLevel: 5
   playerHealth: 0
   playerMagic: 0

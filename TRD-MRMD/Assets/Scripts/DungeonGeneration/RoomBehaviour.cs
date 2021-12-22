@@ -148,6 +148,12 @@ public class RoomBehaviour : MonoBehaviour
     {
         switch (roomInfo.roomType)
         {
+            case RoomInfo.RoomType.Fountain:
+                SetupFountainRoom();
+                break;
+            case RoomInfo.RoomType.Loot:
+                SetupLootRoom();
+                break;
             case RoomInfo.RoomType.NextLevel:
                 SetupNextLevelRoom();
                 break;
@@ -155,6 +161,16 @@ public class RoomBehaviour : MonoBehaviour
                 SetupBossRoom();
                 break;
         }
+    }
+
+    void SetupFountainRoom()
+    {
+        FindObjectOfType<ObjectSpawner>().InstantiateFountain(transform);
+    }
+
+    void SetupLootRoom()
+    {
+        FindObjectOfType<ObjectSpawner>().InstantiateLoot(transform);
     }
 
     void SetupNextLevelRoom()
