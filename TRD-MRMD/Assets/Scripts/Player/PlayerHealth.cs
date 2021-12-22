@@ -22,8 +22,13 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = MaxHealth;
-        healthBar.SetMaxHealth(MaxHealth);
+        if (GameManager.gameManager.playerHealth == 0)
+        {
+            currentHealth = MaxHealth;
+            healthBar.SetMaxHealth(MaxHealth);
+        }
+
+        
         invulnerabilityTimer = 0;
         invulnerability = false;
     }
@@ -80,6 +85,17 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth += health;
         healthBar.SetHealth(currentHealth);
+    }
+
+    public void SetHealth(int health)
+    {
+        currentHealth = health;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
     }
 
     void TakeDeath()

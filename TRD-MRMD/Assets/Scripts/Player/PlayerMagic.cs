@@ -19,8 +19,11 @@ public class PlayerMagic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentMagic = maxMagic;
-        magicBar.SetMaxMagic(maxMagic);
+        if (GameManager.gameManager.playerHealth == 0)
+        {
+            currentMagic = maxMagic;
+            magicBar.SetMaxMagic(maxMagic);
+        }
     }
 
     // Update is called once per frame
@@ -60,5 +63,16 @@ public class PlayerMagic : MonoBehaviour
             currentMagic = maxMagic;
         }
         magicBar.SetMagic(currentMagic);
+    }
+
+    public void SetMagic(int magic)
+    {
+        currentMagic = magic;
+        magicBar.SetMagic(currentMagic);
+    }
+
+    public int GetMagic()
+    {
+        return currentMagic;
     }
 }

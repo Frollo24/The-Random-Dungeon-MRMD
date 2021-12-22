@@ -20,10 +20,14 @@ public class RoomBehaviour : MonoBehaviour
     public bool colourRoom;
 
 
+    private void Awake()
+    {
+        enemyGenerator = FindObjectOfType<EnemyGenerator>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        enemyGenerator = FindObjectOfType<EnemyGenerator>();
 
 #if UNITY_EDITOR
         if (colourRoom)
@@ -60,8 +64,10 @@ public class RoomBehaviour : MonoBehaviour
                     elem.material.color = Color.yellow;
                     break;
                 case RoomInfo.RoomType.Boss:
-                case RoomInfo.RoomType.NextLevel:
                     elem.material.color = Color.red;
+                    break;
+                case RoomInfo.RoomType.NextLevel:
+                    elem.material.color = Color.blue;
                     break;
             }
         }
@@ -102,14 +108,22 @@ public class RoomBehaviour : MonoBehaviour
         switch (roomInfo.roomType)
         {
             case RoomInfo.RoomType.NextLevel:
-                SetupNextLevel();
+                SetupNextLevelRoom();
+                break;
+            case RoomInfo.RoomType.Boss:
+                SetupBossRoom();
                 break;
         }
     }
 
-    void SetupNextLevel()
+    void SetupNextLevelRoom()
     {
         FindObjectOfType<LevelManager>().SpawnNextLevelTrigger(this);
+    }
+
+    void SetupBossRoom()
+    {
+        transform.localScale = Vector3.one * 3;
     }
 
     public void EnterRoom()
@@ -144,8 +158,8 @@ public class RoomBehaviour : MonoBehaviour
     {
         if (!hasSpawned)
         {
-            //Spawn scene reloader
-
+            //TODO spawn boss
+            enemyGenerator.SpawnBoss(transform);
         }
 
         hasSpawned = true;

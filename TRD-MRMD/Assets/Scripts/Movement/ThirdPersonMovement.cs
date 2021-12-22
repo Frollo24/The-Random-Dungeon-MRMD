@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform cam;
+
+    public static Vector3 startPosition = new Vector3(2, 0.84f, 0);
 
     public float speed = 1.5f;
     public float smoothingTime = 0.1f;

@@ -9,7 +9,26 @@ public class NextLevelBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            var gameManager = GameManager.gameManager;
+
+            gameManager.level++;
+            if (gameManager.level > gameManager.maxLevel)
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+
+            }
+            else
+            {
+                var player = FindObjectOfType<ThirdPersonMovement>();
+                gameManager.playerHealth = player.GetComponent<PlayerHealth>().GetHealth();
+                gameManager.playerMagic = player.GetComponent<PlayerMagic>().GetMagic();
+
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 }

@@ -50,15 +50,21 @@ public class DungeonGeneratorManager : MonoBehaviour
 
     void GenerateLevel()
     {
-        switch (GenerationMethod)
+        if (GameManager.gameManager.level != GameManager.gameManager.maxLevel) {
+            switch (GenerationMethod)
+            {
+                case RandomRoomNumberMethod.Fixed:
+                    GenerateProcLevel(FixedValue);
+                    break;
+                case RandomRoomNumberMethod.Random:
+                    int random = UnityEngine.Random.Range(RandomLowerBound, RandomUpperBound + 1);
+                    GenerateProcLevel(random);
+                    break;
+            }
+        }
+        else
         {
-            case RandomRoomNumberMethod.Fixed:
-                GenerateProcLevel(FixedValue);
-                break;
-            case RandomRoomNumberMethod.Random:
-                int random = UnityEngine.Random.Range(RandomLowerBound, RandomUpperBound + 1);
-                GenerateProcLevel(random);
-                break;
+            GenerateBossLevel();
         }
 
         RearrangeLevel();
@@ -107,6 +113,16 @@ public class DungeonGeneratorManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    void GenerateBossLevel()
+    {
+        var roomInfo = ScriptableObject.CreateInstance<RoomInfo>();
+        roomInfo.roomType = RoomInfo.RoomType.Boss;
+
+        roomInfo.position = currentPos;
+        roomInfoList.Add(roomInfo);
+        positions.Add(currentPos);
     }
 
     void SetRandomRoom(RoomInfo roomInfo)
