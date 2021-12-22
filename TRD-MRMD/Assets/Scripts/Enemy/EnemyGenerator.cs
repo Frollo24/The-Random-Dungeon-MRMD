@@ -7,6 +7,7 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private int enemiesPerRoomAmount = 4;
 
     public GameObject enemy;
+    public GameObject boss;
 
     // Start is called before the first frame update
     void Start()
@@ -30,5 +31,10 @@ public class EnemyGenerator : MonoBehaviour
             enemiesSpawned++;
             if (enemiesSpawned == enemiesPerRoomAmount) break;
         }
+    }
+
+    public void SpawnBoss(Transform spawnPoint)
+    {
+        Instantiate(boss, spawnPoint.position, spawnPoint.rotation);
     }
 }

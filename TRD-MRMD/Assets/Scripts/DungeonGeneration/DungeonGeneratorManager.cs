@@ -50,15 +50,21 @@ public class DungeonGeneratorManager : MonoBehaviour
 
     void GenerateLevel()
     {
-        switch (GenerationMethod)
+        if (GameManager.gameManager.level != GameManager.gameManager.maxLevel) {
+            switch (GenerationMethod)
+            {
+                case RandomRoomNumberMethod.Fixed:
+                    GenerateProcLevel(FixedValue);
+                    break;
+                case RandomRoomNumberMethod.Random:
+                    int random = UnityEngine.Random.Range(RandomLowerBound, RandomUpperBound + 1);
+                    GenerateProcLevel(random);
+                    break;
+            }
+        }
+        else
         {
-            case RandomRoomNumberMethod.Fixed:
-                GenerateProcLevel(FixedValue);
-                break;
-            case RandomRoomNumberMethod.Random:
-                int random = UnityEngine.Random.Range(RandomLowerBound, RandomUpperBound + 1);
-                GenerateProcLevel(random);
-                break;
+            GenerateBossLevel();
         }
 
         RearrangeLevel();
@@ -79,7 +85,7 @@ public class DungeonGeneratorManager : MonoBehaviour
                 }
                 else if (i == num - 1)
                 {
-                    roomInfo.roomType = RoomInfo.RoomType.Boss;
+                    roomInfo.roomType = RoomInfo.RoomType.NextLevel;
                 }
                 else
                     SetRandomRoom(roomInfo);
@@ -107,6 +113,16 @@ public class DungeonGeneratorManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    void GenerateBossLevel()
+    {
+        var roomInfo = ScriptableObject.CreateInstance<RoomInfo>();
+        roomInfo.roomType = RoomInfo.RoomType.Boss;
+
+        roomInfo.position = currentPos;
+        roomInfoList.Add(roomInfo);
+        positions.Add(currentPos);
     }
 
     void SetRandomRoom(RoomInfo roomInfo)
@@ -146,7 +162,7 @@ public class DungeonGeneratorManager : MonoBehaviour
             var room = Instantiate(resource, roomInfo.position, Quaternion.identity);
             room.roomInfo = roomInfo;
             room.SpawnWalls();
-            //room.BuildNavMesh();
+            room.SetupRoom();
             Debug.Log("Instantiated room: " + roomInfo.roomType);
         }
     }

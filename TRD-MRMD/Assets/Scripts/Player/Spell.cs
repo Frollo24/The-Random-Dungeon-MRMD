@@ -5,7 +5,8 @@ using UnityEngine;
 public class Spell : MonoBehaviour
 {
     public int damage;
-    public Vector3 direction { get; set; }
+    public int spellCost = 10;
+    public Vector3 Direction { get; set; }
     public float speed;
 
     [SerializeField] private Transform particles;
@@ -25,7 +26,7 @@ public class Spell : MonoBehaviour
 
     private void Move()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += Direction * speed * Time.deltaTime;
     }
 
     private void Explode()
