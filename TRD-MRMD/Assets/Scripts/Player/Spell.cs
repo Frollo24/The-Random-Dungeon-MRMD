@@ -47,7 +47,10 @@ public class Spell : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
+        {
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
+            Explode();
+        }
 
         if (!other.CompareTag("Player") && !other.isTrigger)
             Explode();
