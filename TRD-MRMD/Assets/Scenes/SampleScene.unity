@@ -1789,7 +1789,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915457822}
-  m_LocalRotation: {x: 0.04622492, y: 0.000000017187986, z: -7.9536355e-10, w: 0.99893105}
+  m_LocalRotation: {x: 0.04622492, y: -0.000000017187991, z: 7.953638e-10, w: 0.99893105}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1948,7 +1948,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.06433938, y: -0.000000004333129, z: 2.7404778e-10, w: 0.9979281}
+  m_LocalRotation: {x: 0.06433938, y: -0.00000000433314, z: 2.7421757e-10, w: 0.9979281}
   m_LocalPosition: {x: 2, y: 2.34, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3702,7 +3702,7 @@ MonoBehaviour:
   RandomUpperBound: 10
   MoveAmount: {x: 10, y: 0, z: 10}
   fountainRoomsSpawned: 0
-  maxFountainRooms: 2
+  maxFountainRooms: 1
   lootRoomsSpawned: 0
   maxLootRooms: 2
   currentPos: {x: 0, y: 0, z: 0}
