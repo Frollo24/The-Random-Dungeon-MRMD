@@ -5,8 +5,8 @@
 TRD-MRMD/[Ll]ibrary/**
 TRD-MRMD/[Tt]emp/**
 TRD-MRMD/[Oo]bj/**
-TRD-MRMD/[Bb]uild/**
-TRD-MRMD/[Bb]uilds/**
+# TRD-MRMD/[Bb]uild/**
+# TRD-MRMD/[Bb]uilds/**
 TRD-MRMD/[Ll]ogs/**
 TRD-MRMD/[Mm]emoryCaptures/**
 
