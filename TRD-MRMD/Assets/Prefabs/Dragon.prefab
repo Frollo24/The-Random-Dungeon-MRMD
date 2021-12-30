@@ -127,7 +127,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.45
-  m_Height: 2.25
+  m_Height: 2
   m_Direction: 2
   m_Center: {x: 0, y: 0.5, z: 0.25}
 --- !u!195 &5446895192978292994
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abf297e2db02fd4c8959e12d24f116f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.6
+  speed: 1.4
   agent: {fileID: 0}
   player: {fileID: 0}
   enemyDamage: 15

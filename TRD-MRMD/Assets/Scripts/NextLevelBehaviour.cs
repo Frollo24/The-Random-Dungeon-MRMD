@@ -14,12 +14,7 @@ public class NextLevelBehaviour : MonoBehaviour
             gameManager.level++;
             if (gameManager.level > gameManager.maxLevel)
             {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
-
+                SceneManager.LoadScene("MainMenu");
             }
             else
             {

@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     void SetupSunlightIntensity()
     {
         sunlight = FindObjectOfType<Light>();
-        sunlight.intensity = 1 - (level - 1) * 0.2f;
+        sunlight.intensity = 0.7f - (level - 1) * 0.15f;
     }
 
     // Start is called before the first frame update
