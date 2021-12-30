@@ -112,9 +112,7 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeDeath()
     {
-        //TODO make proper death
-        Debug.Log("Death");
-        currentHealth = MaxHealth;
-        healthBar.SetMaxHealth(MaxHealth);
+        FindObjectOfType<DragonBehaviour>().IsDying = false;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }

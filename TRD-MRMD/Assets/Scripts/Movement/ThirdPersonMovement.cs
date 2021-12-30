@@ -7,6 +7,7 @@ public class ThirdPersonMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform cam;
+    public Animator animator;
 
     public float speed = 1.5f;
     public float smoothingTime = 0.1f;
@@ -22,6 +23,8 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (movementDir.magnitude >= 0.1f)
         {
+            animator.SetBool("IsWalking", true);
+
             //Make it look where the camera is looking
             float targetAngle = Mathf.Atan2(movementDir.x, movementDir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref smoothVelocity, smoothingTime);
@@ -31,6 +34,10 @@ public class ThirdPersonMovement : MonoBehaviour
             newMoveDir.Normalize();
 
             controller.Move(newMoveDir * speed * Time.deltaTime);
-        }    
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
+        }
     }
 }

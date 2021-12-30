@@ -23,9 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        //agent = gameObject.AddComponent<NavMeshAgent>();
-        Debug.Log(agent.isOnNavMesh);
-        //agent.speed = speed;
+        agent.speed = speed;
 
         player = FindObjectOfType<ThirdPersonMovement>();
     }
@@ -49,7 +47,7 @@ public class EnemyBehaviour : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
